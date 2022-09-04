@@ -59,6 +59,9 @@ class StreamCron extends Command
             $data = $this->fetchData();
             if (is_array($data) && count($data)) {
                 shuffle($data);
+                $listStreamIds = [];
+
+                print "Total streams from API: " . count($data) . PHP_EOL;
 
                 print "\e[0;32;47m =========START TO INSERT TO DB ================ \e[0m\n\"";
 
@@ -97,7 +100,7 @@ class StreamCron extends Command
                             }
 
                             $streamModel = null;
-                            if (!empty($streamId) && !empty($streamTitle)) {
+                            if (!empty($streamId)) {
                                 $streamModel = Stream::updateOrCreate(
                                     ['id' => $streamId],
                                     [
@@ -108,6 +111,8 @@ class StreamCron extends Command
                                         'start_at' => $startedAt,
                                     ]
                                 );
+                            } else {
+                                print "Empty '{$streamId}', '{$streamTitle}'" . PHP_EOL;
                             }
 
 
@@ -172,13 +177,27 @@ class StreamCron extends Command
                                 }
                             }
                             DB::commit();
+                            $listStreamIds[] = (int) $streamId;
                         } catch (Throwable $e) {
                             print "\e[0;31;42m {$e->getMessage()} \e[0m\n\"";
                             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
                             DB::rollBack();
                         }
+                    } else {
+                        print "---Not Live---" . print_r($stream, 1) . PHP_EOL;
                     }
                 }
+
+                print "Total inserted streams: " . count($listStreamIds) .PHP_EOL;
+                //cleaning up old streams and streams_tags
+                DB::table('streams_tags')
+                    ->whereNotIn('stream_id', $listStreamIds)
+                    ->delete();
+
+                DB::table('streams')
+                    ->whereNotIn('id', $listStreamIds)
+                    ->delete();
+
             }
         } catch (\Exception $e) {
             print "\e[0;31;42m {$e->getMessage()} \e[0m\n\"";
@@ -190,7 +209,7 @@ class StreamCron extends Command
 
     protected function fetchData() : array
     {
-        $nTop = $this->option('nTop');
+        $nTop = $this->option('nTop') ?: 1000;
         print "\e[0;32;47m =========START TO FETCH {$nTop} FROM TWITCH API ================ \e[0m\n\"";
 
         $data = [];
