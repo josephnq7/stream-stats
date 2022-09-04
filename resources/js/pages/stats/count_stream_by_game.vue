@@ -13,7 +13,7 @@
                           @vuetable:pagination-data="onPaginationData"/>
 
                 <div style="padding-top:10px">
-                    <vuetable-pagination
+                    <vue-table-pagination-bootstrap4
                         ref="pagination"
                         :css="css.pagination"
                         @vuetable-pagination:change-page="onChangePage" />
@@ -25,8 +25,7 @@
 
 <script>
 import Vuetable from 'vuetable-2/dist/vuetable-2'
-// import VueTablePaginationBootstrap4 from "../../components/VueTablePaginationBootstrap4";
-import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
+import VueTablePaginationBootstrap4 from "../../components/VueTablePaginationBootstrap4";
 import axios from "axios";
 import _ from "lodash";
 import CssConfig from "../../plugins/bootstrap4CssConfig.js";
@@ -36,8 +35,7 @@ export default {
     name: "count_stream_by_game",
     components: {
         Vuetable,
-        VuetablePagination
-        // VueTablePaginationBootstrap4
+        VueTablePaginationBootstrap4
     },
     data() {
         return {
@@ -49,10 +47,11 @@ export default {
                 },
                 {
                     name: 'count',
-                    title: 'Total Number of Streams'
+                    title: 'Total Number of Streams',
+                    sortField: 'count'
                 },
             ],
-            perPage: 20,
+            perPage: 15,
             data: []
         };
     },
@@ -95,7 +94,7 @@ export default {
                 local.length,
                 this.perPage
             );
-            console.log('pagination:', pagination)
+            // console.log('pagination:', pagination)
             let from = pagination.from - 1;
             let to = from + this.perPage;
 
