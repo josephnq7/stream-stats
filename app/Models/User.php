@@ -44,6 +44,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $appends = ['avatar'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -77,6 +79,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * dynamically get avatar picture for user based on provider that he/she used to login to the system
+     *
+     * @return string
+     */
+    public function getAvatarAttribute(): string
+    {
+        $tokenName = $this->tokens()->orderBy('id', 'DESC')->first()->value('name');
+        $parts = explode('_', $tokenName);
+        $provider = $parts[0] ?? '';
+
+        if (!empty($provider)) {
+            /** @var OAuthProvider $provider */
+            $provider = $this->oauthProviders()->where('provider', $provider)->orderBy('id', 'DESC')->first();
+            if (!empty($provider)) {
+                return $provider->avatar;
+            }
+        }
+
+        return '';
+    }
 
     /**
      * Get the oauth providers.
