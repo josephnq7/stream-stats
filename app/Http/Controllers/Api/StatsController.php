@@ -15,7 +15,7 @@ class StatsController extends Controller
             $countByGame = [];
             $games = Game::select(['games.id', 'games.name'])
                 ->join('streams', 'games.id', '=', 'streams.game_id')
-                ->get();
+                ->cursor();
 
             foreach ($games as $game) {
                 /** @var Game $game */
