@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Log;
 
 class StatsController extends Controller
 {
-    public function totalStreamsByGame()
+    /**
+     * @return JsonResponse
+     */
+    public function totalStreamsByGame() : JsonResponse
     {
         try {
             $countByGame = [];
@@ -34,6 +37,41 @@ class StatsController extends Controller
             });
 
             return response()->json(['data' => $countByGame]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function topViewsByGame() : JsonResponse
+    {
+        try {
+            $topByGame = [];
+            $records = Game::select(['games.id', 'games.name', 'streams.viewer_count', 'streams.title'])
+                ->join('streams', 'games.id', '=', 'streams.game_id')
+                ->cursor();
+
+            foreach ($records as $record) {
+                if (!isset($topByGame[$record->id])) {
+                    $topByGame[$record->id] = [
+                        'name' => $record->name,
+                        'top' => $record->viewer_count,
+                        'title' => $record->title
+                    ];
+                } else {
+                    $currentTop = $topByGame[$record->id]['top'];
+                    $topByGame[$record->id]['top'] = ($record->viewer_count > $currentTop ? $record->viewer_count : $currentTop);
+                }
+            }
+
+            usort($topByGame, function ($game1, $game2) {
+                return $game2['top'] <=> $game1['top'];
+            });
+
+            return response()->json(['data' => $topByGame]);
         } catch (\Exception $e) {
             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
             return response()->json(['error' => $e->getMessage()], 500);

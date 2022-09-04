@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-10 m-auto">
-            <card :title="$t('count_streams_by_game')">
+            <card :title="$t('top_views_by_game')">
                 <vuetable ref="vuetable"
                           :api-mode="false"
                           :fields="fields"
@@ -32,7 +32,7 @@ import {dataTableMixin} from "../../mixins/data_table";
 
 
 export default {
-    name: "count_stream_by_game",
+    name: "top_views_by_game",
     components: {
         Vuetable,
         VueTablePaginationBootstrap4
@@ -47,9 +47,13 @@ export default {
                     title: 'Game',
                 },
                 {
-                    name: 'count',
-                    title: 'Total Number of Streams',
-                    sortField: 'count'
+                    name: 'top',
+                    title: 'Top Viewer Count',
+                    sortField: 'top'
+                },
+                {
+                    name: 'title',
+                    title: 'Stream Title',
                 },
             ],
             perPage: 15,
@@ -58,7 +62,7 @@ export default {
     },
     mounted() {
         // debugger;
-        axios.get("/api/stats/total-streams-by-game").then(response => {
+        axios.get("/api/stats/top-views-by-game").then(response => {
             this.data = response.data.data;
         });
     },

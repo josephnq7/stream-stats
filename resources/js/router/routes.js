@@ -12,6 +12,12 @@ export default [
         name: 'stats.count-stream-by-game',
         component: page('stats/count_stream_by_game.vue')
     },
+    {
+        path: '/stats/top-views-by-game',
+        name: 'stats.top-views-by-game',
+        component: page('stats/top_views_by_game.vue')
+    },
+
 
     {path: '/home', name: 'home', component: page('home.vue')},
 

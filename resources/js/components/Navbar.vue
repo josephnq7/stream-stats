@@ -27,6 +27,10 @@
                                     {{ $t('count_streams_by_game') }}
                                 </router-link>
                                 <div class="dropdown-divider"/>
+                                <router-link :to="{ name: 'stats.top-views-by-game' }" class="dropdown-item ps-3">
+                                    <fa icon="brain" fixed-width/>
+                                    {{ $t('top_views_by_game') }}
+                                </router-link>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
