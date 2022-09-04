@@ -9,13 +9,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
-    faGithub
+    faTwitch
 } from '@fortawesome/free-brands-svg-icons'
 
 config.autoAddCss = false
 
 library.add(
-    faUser, faLock, faSignOutAlt, faCog, faGithub
+    faUser, faLock, faSignOutAlt, faCog, faTwitch
 )
 
 Vue.component('Fa', FontAwesomeIcon)

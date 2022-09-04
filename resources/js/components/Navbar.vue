@@ -15,6 +15,13 @@
                     <!-- Authenticated -->
                     <template v-if="user">
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark"
+                               href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false"
+                            >
+                                <img :src="user.avatar" class="rounded-circle profile-photo me-1">
+                                {{ user.user_name }}
+                            </a>
                             <div class="dropdown-menu">
                                 <a href="#" class="dropdown-item ps-3" @click.prevent="logout">
                                     <fa icon="sign-out-alt" fixed-width/>

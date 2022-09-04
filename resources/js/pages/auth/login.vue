@@ -4,6 +4,8 @@
             <card :title="$t('login')">
                 <div class="mb-3 row">
                     <div class="col-md-7">
+                        <!-- Twitch Login Button -->
+                        <login-twitch/>
                     </div>
                 </div>
             </card>
@@ -12,7 +14,9 @@
 </template>
 
 <script>
+import LoginTwitch from "../../components/LoginTwitch";
 export default {
+    components: {LoginTwitch},
     middleware: 'guest'
 }
 </script>
