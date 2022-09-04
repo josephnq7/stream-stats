@@ -19,6 +19,21 @@
                                href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false"
                             >
+                                Stats
+                            </a>
+                            <div class="dropdown-menu">
+                                <router-link :to="{ name: 'stats.count-stream-by-game' }" class="dropdown-item ps-3">
+                                    <fa icon="calculator" fixed-width/>
+                                    {{ $t('count_streams_by_game') }}
+                                </router-link>
+                                <div class="dropdown-divider"/>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark"
+                               href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false"
+                            >
                                 <img :src="user.avatar" class="rounded-circle profile-photo me-1">
                                 {{ user.user_name }}
                             </a>
