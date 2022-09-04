@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function logout(Request $request)
     {
-        //        $result = $client->request(
+//        $result = $client->request(
 //            'POST',
 //            'https://id.twitch.tv/oauth2/revoke',
 //            [

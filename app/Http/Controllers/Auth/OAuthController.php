@@ -8,18 +8,17 @@ use App\Models\OAuthProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
-use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
+use Laravel\Socialite\Facades\Socialite;
 
 class OAuthController extends Controller
 {
     use AuthenticatesUsers;
-
     /**
      * @param $provider
      * @return JsonResponse
      */
-    public function fetchUrl($provider): JsonResponse
+    public function fetchUrl($provider) : JsonResponse
     {
         return response()->json(
             [
@@ -93,10 +92,11 @@ class OAuthController extends Controller
                 'tokenType' => 'bearer',
                 'expireAt' => config('sanctum.expiration'),
             ]);
-        } catch (OAuthException $e) {
+        } catch(OAuthException $e) {
             throw $e;
         } catch (\Throwable $e) {
             throw new OAuthException('Something errors', 500);
         }
     }
+
 }

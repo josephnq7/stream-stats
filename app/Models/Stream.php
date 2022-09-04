@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $start_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Channel|null $channel
+ * @property-read \App\Models\Game|null $game
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|Stream newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stream newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stream query()
@@ -28,10 +32,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Stream whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stream whereViewerCount($value)
  * @mixin \Eloquent
- * @property-read \App\Models\Channel|null $channel
- * @property-read \App\Models\Game|null $game
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
- * @property-read int|null $tags_count
  */
 class Stream extends Model
 {

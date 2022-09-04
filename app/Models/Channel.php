@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Stream[] $streams
+ * @property-read int|null $streams_count
  * @method static \Illuminate\Database\Eloquent\Builder|Channel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Channel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Channel query()
@@ -21,11 +23,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Channel whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Channel whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Stream[] $streams
- * @property-read int|null $streams_count
  */
 class Channel extends Model
 {
+    use HasFactory;
+
     public $incrementing = false;
 
     protected $fillable = ['id', 'name',];

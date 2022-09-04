@@ -6,6 +6,7 @@ use App\Models\Channel;
 use App\Models\Game;
 use App\Models\Stream;
 use App\Models\Tag;
+use Cache;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Log;
@@ -203,6 +204,9 @@ class StreamCron extends Command
             print "\e[0;31;42m {$e->getMessage()} \e[0m\n\"";
             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
         }
+
+        //removed all cached, since we refreshed the streams
+        Cache::flush();
 
         print "\e[0;32;47m =========DONE INSERTING TO DB ================ \e[0m\n\"";
     }

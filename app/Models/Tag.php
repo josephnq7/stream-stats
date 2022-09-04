@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Stream[] $streams
+ * @property-read int|null $streams_count
  * @method static \Illuminate\Database\Eloquent\Builder|Tag newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tag newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tag query()
@@ -22,15 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Stream[] $streams
- * @property-read int|null $streams_count
  */
 class Tag extends Model
 {
     use HasFactory;
 
     protected $fillable = ['code', 'name',];
-
     public function streams()
     {
         return $this->belongsToMany(Stream::class, 'streams_tags');

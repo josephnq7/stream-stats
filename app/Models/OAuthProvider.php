@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\OAuthProvider
  *
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider query()
- * @mixin \Eloquent
  * @property int $id
  * @property int $user_id
  * @property string $provider
@@ -22,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider query()
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereAccessToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereCreatedAt($value)
@@ -31,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereRefreshToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OAuthProvider whereUserId($value)
+ * @mixin \Eloquent
  */
 class OAuthProvider extends Model
 {
