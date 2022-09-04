@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\Stream;
 use Illuminate\Http\JsonResponse;
 use Log;
 
@@ -63,7 +64,10 @@ class StatsController extends Controller
                     ];
                 } else {
                     $currentTop = $topByGame[$record->id]['top'];
-                    $topByGame[$record->id]['top'] = ($record->viewer_count > $currentTop ? $record->viewer_count : $currentTop);
+                    if ($record->viewer_count > $currentTop) {
+                        $topByGame[$record->id]['top'] = $record->viewer_count;
+                        $topByGame[$record->id]['title'] = $record->title;
+                    }
                 }
             }
 
@@ -76,5 +80,25 @@ class StatsController extends Controller
             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function topStreams() : JsonResponse
+    {
+        try {
+            $streams = Stream::select(['streams.title', 'channels.name AS channel_name', 'games.name', 'streams.viewer_count'])
+                ->join('games', 'games.id', '=', 'streams.game_id')
+                ->join('channels', 'channels.id', '=', 'streams.channel_id')
+                ->limit(100)->orderBy('viewer_count', 'DESC')->get();
+
+            $streams = $streams->toArray();
+            return response()->json(['data' => $streams]);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
     }
 }

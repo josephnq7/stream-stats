@@ -33,6 +33,7 @@ import {dataTableMixin} from "../../mixins/data_table";
 
 export default {
     name: "top_views_by_game",
+    middleware: 'auth',
     components: {
         Vuetable,
         VueTablePaginationBootstrap4

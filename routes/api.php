@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('stats/total-streams-by-game', [StatsController::class, 'totalStreamsByGame']);
     Route::get('stats/top-views-by-game', [StatsController::class, 'topViewsByGame']);
+    Route::get('stats/top-streams', [StatsController::class, 'topStreams']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
