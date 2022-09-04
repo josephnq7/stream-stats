@@ -36,6 +36,11 @@
                                     <fa icon="list" fixed-width/>
                                     {{ $t('top_streams') }}
                                 </router-link>
+                                <div class="dropdown-divider"/>
+                                <router-link :to="{ name: 'stats.streams-by-hour' }" class="dropdown-item ps-3">
+                                    <fa icon="stream" fixed-width/>
+                                    {{ $t('streams_by_hour') }}
+                                </router-link>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

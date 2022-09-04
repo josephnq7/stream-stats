@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-10 m-auto">
-            <card :title="$t('top_streams')">
+            <card :title="$t('streams_by_hour')">
                 <vuetable ref="vuetable"
                           :api-mode="false"
                           :fields="fields"
@@ -32,7 +32,7 @@ import {dataTableMixin} from "../../mixins/data_table";
 
 
 export default {
-    name: "top_streams",
+    name: "stream_by_hours",
     middleware: 'auth',
     components: {
         Vuetable,
@@ -44,24 +44,14 @@ export default {
             css: CssConfig,
             fields: [
                 {
-                    name: 'title',
-                    title: 'Stream Title',
-                    sortField: 'title'
+                    name: 'total_streams',
+                    title: 'Total Streams',
+                    sortField: 'total_streams'
                 },
                 {
-                    name: 'channel_name',
-                    title: 'Channel Name',
-                    sortField: 'channel_name'
-                },
-                {
-                    name: 'name',
-                    title: 'Game Name',
-                    sortField: 'name'
-                },
-                {
-                    name: 'viewer_count',
-                    title: 'Viewer Count',
-                    sortField: 'viewer_count'
+                    name: 'start_at_hour',
+                    title: 'Start At Hour',
+                    sortField: 'start_at_hour'
                 },
             ],
             perPage: 15,
@@ -70,7 +60,7 @@ export default {
     },
     mounted() {
         // debugger;
-        axios.get("/api/stats/top-streams").then(response => {
+        axios.get("/api/stats/streams-by-hour").then(response => {
             this.data = response.data.data;
         });
     },

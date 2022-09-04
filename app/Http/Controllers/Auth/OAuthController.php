@@ -24,7 +24,9 @@ class OAuthController extends Controller
         return response()->json(
             [
                 'url' => Socialite::driver($provider)
+                    ->scopes('user:read:email user:read:follows')
                     ->stateless()
+                    ->with(['force_verify' => 'true'])
                     ->redirect()
                     ->getTargetUrl(),
             ]

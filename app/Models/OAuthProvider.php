@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OAuthProvider extends Model
 {
+    const PROVIDER_TWITCH = 'twitch';
+
     use HasFactory;
 
     /**

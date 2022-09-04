@@ -14,5 +14,6 @@
     "login_with": "Login with",
     "count_streams_by_game": "Total Streams By Game",
     "top_views_by_game" : "Top Streams By Viewer Count For Each Game",
-    "top_streams" : "List 100 of Top Streams By Viewer Count"
+    "top_streams" : "List 100 of Top Streams By Viewer Count",
+    "streams_by_hour" : "Total Streams By Hours"
 }

@@ -23,6 +23,12 @@ export default [
         component: page('stats/top_streams.vue')
     },
 
+    {
+        path: '/stats/streams-by-hour',
+        name: 'stats.streams-by-hour',
+        component: page('stats/streams_by_hour.vue')
+    },
+
     {path: '/home', name: 'home', component: page('home.vue')},
 
     {path: '*', component: page('errors/404.vue')}
