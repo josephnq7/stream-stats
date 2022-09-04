@@ -32,7 +32,7 @@ import {dataTableMixin} from "../../mixins/data_table";
 
 
 export default {
-    name: "stream_by_hours",
+    name: "streams_by_hour",
     middleware: 'auth',
     components: {
         Vuetable,

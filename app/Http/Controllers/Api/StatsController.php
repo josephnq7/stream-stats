@@ -183,7 +183,7 @@ class StatsController extends Controller
             return response()->json(
                 [
                     'data' => [
-                        'sharedTag' => $sharedTags,
+                        'sharedTags' => $sharedTags,
                         'sharedStreams' => $sharedStreamsWithTop,
                         'viewerCountNeededToBeTop1000' => $numOfViewerCountNeeded,
                         'nameOfLowestStreamFollowing' => $lowestStreamName
