@@ -22,7 +22,6 @@ export default [
         name: 'stats.top-streams',
         component: page('stats/top_streams.vue')
     },
-
     {
         path: '/stats/streams-by-hour',
         name: 'stats.streams-by-hour',

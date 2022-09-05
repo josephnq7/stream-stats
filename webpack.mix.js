@@ -1,5 +1,5 @@
-const { join, resolve } = require('path')
-const { copySync, removeSync } = require('fs-extra')
+const {join, resolve} = require('path')
+const {copySync, removeSync} = require('fs-extra')
 const mix = require('laravel-mix')
 require('laravel-mix-versionhash')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
@@ -9,7 +9,11 @@ mix
     extractStyles: true
 })
     .sass('resources/sass/app.scss', 'public/dist/css')
-
+    .copy('node_modules/@fortawesome/fontawesome-free/webfonts',
+        'public/webfonts')
+    .options({
+        processCssUrls: false
+    })
     .disableNotifications()
 
 if (mix.inProduction()) {
@@ -43,7 +47,7 @@ mix.then(() => {
     }
 })
 
-function publishAseets () {
+function publishAseets() {
     const publicDir = resolve(__dirname, './public')
 
     removeSync(join(publicDir, 'dist'))
