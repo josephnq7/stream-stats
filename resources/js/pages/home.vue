@@ -36,7 +36,7 @@
                             </div>
                             <div v-else>
                                 <div class="alert alert-warning" role="alert">
-                                    All your following streams are in top 1000
+                                    {{ sharedStreams.length ? `All your following streams are in top 1000` : `N/A` }}
                                 </div>
                             </div>
                         </card>
